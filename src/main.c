@@ -47,6 +47,8 @@ int main(int argc, char *argv[]) {
 		"exit",
 		"echo",
 		"type",
+		"pwd",
+		"cd",
 	};
 
 	int num_of_commands = sizeof(valid_commands) / sizeof(valid_commands[0]);
@@ -96,6 +98,27 @@ int main(int argc, char *argv[]) {
 			continue;
 		}
 
+		if (strcmp(args[0], "pwd") == 0) {
+			char cwd[PATH_MAX];
+			if (getcwd(cwd, sizeof(cwd)) != NULL) {
+				printf("%s\n", cwd);
+			}
+			continue;
+		}
+
+		if (strcmp(args[0], "cd") == 0) {
+			char *destination = args[1];
+			if (destination == NULL || strcmp(destination, "~") == 0) {
+				destination = getenv("HOME");
+			}
+
+			if (destination == NULL || chdir(destination) != 0) {
+				char *display_path = args[1] == NULL ? "~" : args[1];
+				printf("cd: %s: No such file or directory\n", display_path);
+			}
+			continue;
+		}
+
 		if (strcmp(args[0], "type") == 0) {
 			if (arg_count < 2) {
 				continue;
@@ -121,7 +144,7 @@ int main(int argc, char *argv[]) {
 		if (find_executable_in_path(args[0], full_path, sizeof(full_path))) {
 			pid_t pid = fork();
 			if (pid == 0) {
-				execv(full_path, args);
+				execvp(args[0], args);
 				exit(1);
 			} else if (pid > 0) {
 				int status;
