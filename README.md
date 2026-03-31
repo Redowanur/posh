@@ -1,24 +1,44 @@
-# POSH — Personal Optimized SHell
+# c-project-structure
 
-POSH is a tiny Unix-like shell written in C.
+Project description
 
-<!-- Other fun expansions you can use:
-- **Portable Operating-System SHell**
-- **POSIX-Oriented SHell**
-- **Personal Operating SHell** -->
+Project image/gif
 
-## What it currently does
+## Requirements
 
-- Interactive prompt: `$ `
-- Built-ins:
-	- `exit` / `exit 0`
-	- `echo`
-	- `type`
-	- `pwd`
-	- `cd` (supports `cd ~` and empty `cd` -> `$HOME`)
-- Finds executables from `$PATH`
-- Runs external commands via `fork` + `execvp`
+Requirements
 
-## Why POSH?
+## Installation
 
-Because it aims to be small, practical, and pleasant to use while you learn how shells work under the hood.
+`make`
+
+## Usage
+
+`bin/run`
+
+## Example
+
+`bin/run`
+
+## Documentation
+
+Location of Documentation
+
+## Directory structure
+```
+|-- Makefile           <- Project makefile
+|-- README             <- Project README
+|-- bin                <- Compiled binaries
+|   `-- run            <- Project main executable
+|-- build              <- Static objects and intermediate files
+|-- data               <- Project data
+|   |-- raw            <- Raw data
+|   |-- interim        <- Interm data
+|   |-- input          <- Input data
+|   |-- output         <- Output data
+|-- docs               <- Documentation
+|-- include            <- Header files
+|-- lib                <- Dynamic objects
+|-- src                <- Source files
+`-- tests              <- Unit tests
+```
